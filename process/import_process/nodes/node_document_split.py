@@ -2,7 +2,7 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -230,7 +230,7 @@ class NodeDocumentSplit(BaseNode):
         content = section.get("content")
 
         # 1.长度未超限，无需切分，直接返回
-        if len(content) <= self.max_chunk_length:
+        if len(content) <= self.config.max_content_length:
             return [section]
 
         # 2.切割文本
